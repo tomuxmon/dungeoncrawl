@@ -39,7 +39,6 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let mut map_builder = MapBuilder::new(&mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
-        // spawn_amulet_of_yala(&mut ecs, map_builder.amulet_start);
         let exit_idx = map_builder.map.point2d_to_index(map_builder.amulet_start);
         map_builder.map.tiles[exit_idx] = TileType::Exit;
         spawn_level(&mut ecs, &mut rng, 0, &map_builder.monster_spawns);
@@ -126,10 +125,9 @@ impl State {
 
     fn advance_level(&mut self) {
         use std::collections::HashSet;
-        // TODO: "&self.ecs" instead of "&mut self.ecs"
         let player_entity = *<Entity>::query()
             .filter(component::<Player>())
-            .iter(&mut self.ecs)
+            .iter(&self.ecs)
             .nth(0)
             .unwrap();
         let mut entities_to_keep = HashSet::new();
