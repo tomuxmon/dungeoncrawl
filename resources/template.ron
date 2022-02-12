@@ -1,0 +1,81 @@
+Templates(
+    entities : [
+        Template(
+            entity_type: Item,
+            name : "Gydantis gerimas", glyph : '!', levels : [ 0, 1, 2 ],
+            provides: Some([ ("Healing", 6) ]),
+            frequency: 2
+        ),
+        Template(
+            entity_type: Item,
+            name : "Skiestas gydantis gerimas", glyph : '!', levels : [ 0 ],
+            provides: Some([ ("Healing", 3) ]),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
+            name : "Zemelapis", glyph : '{', levels : [ 0, 1, 2 ],
+            provides: Some([ ("MagicMap", 0) ]),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
+            name : "Surudyjes kardas", glyph : 's', levels : [ 0, 1 ],
+            base_damage: Some(1),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
+            name : "Blizgantis kardas", glyph : 'S', levels : [ 0, 1, 2 ],
+            base_damage: Some(2),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
+            name : "Milzino kardas", glyph : '/', levels : [ 1, 2 ],
+            base_damage: Some(3),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Goblinas", glyph : 'g', levels : [ 0, 1 ],
+            hp : Some(1),
+            fov: Some(7),
+            base_damage: Some(1),
+            frequency: 4
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Orkas", glyph : 'o', levels : [ 0, 1, 2 ],
+            hp : Some(3),
+            fov: Some(5),
+            base_damage: Some(1),
+            frequency: 2
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Tamsus Orkas", glyph : 'o', levels : [ 1, 2 ],
+            tint: Some((105, 105, 105)),
+            hp : Some(5),
+            fov: Some(3),
+            base_damage: Some(2),
+            frequency: 2
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Ogras", glyph : 'O', levels : [ 1, 2 ],
+            hp : Some(7),
+            fov: Some(6),
+            base_damage: Some(3),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Etinas", glyph : 'E', levels : [ 2 ],
+            hp : Some(10),
+            fov: Some(8),
+            base_damage: Some(4),
+            frequency: 2
+        ),
+    ],
+)
