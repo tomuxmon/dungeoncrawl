@@ -5,12 +5,13 @@ use template::Templates;
 
 pub fn spawn_level(
     ecs: &mut World,
+    res: &mut Resources,
     rng: &mut RandomNumberGenerator,
     level: usize,
     spawn_points: &[Point],
 ) {
     let template = Templates::load("resources/template.ron");
-    template.spawn_entities(ecs, rng, level, spawn_points);
+    template.spawn_entities(ecs, res, rng, level, spawn_points);
 }
 
 pub fn spawn_player(ecs: &mut World, pos: Point) {
