@@ -14,19 +14,25 @@ Templates(
         ),
         Template(
             entity_type: Item,
+            name : "Gydancios sultys", glyph : '1', levels : [ 1, 2 ],
+            provides: Some([ ("Healing", 10) ]),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
             name : "Zemelapis", glyph : '{', levels : [ 0, 1, 2 ],
             provides: Some([ ("MagicMap", 0) ]),
             frequency: 1
         ),
         Template(
             entity_type: Item,
-            name : "Surudyjes kardas", glyph : 's', levels : [ 0, 1 ],
+            name : "Surudyjes kardas", glyph : 's', levels : [ 0 ],
             base_damage: Some(1),
             frequency: 1
         ),
         Template(
             entity_type: Item,
-            name : "Blizgantis kardas", glyph : 'S', levels : [ 0, 1, 2 ],
+            name : "Blizgantis kardas", glyph : 'S', levels : [ 0, 1 ],
             base_damage: Some(2),
             frequency: 1
         ),
@@ -34,6 +40,12 @@ Templates(
             entity_type: Item,
             name : "Milzino kardas", glyph : '/', levels : [ 1, 2 ],
             base_damage: Some(3),
+            frequency: 1
+        ),
+        Template(
+            entity_type: Item,
+            name : "Drakono trigubas kardas", glyph : 'T', levels : [ 1, 2 ],
+            base_damage: Some(5),
             frequency: 1
         ),
         Template(
@@ -74,8 +86,16 @@ Templates(
             name : "Etinas", glyph : 'E', levels : [ 2 ],
             hp : Some(10),
             fov: Some(8),
-            base_damage: Some(4),
+            base_damage: Some(3),
             frequency: 2
+        ),
+        Template(
+            entity_type: Enemy,
+            name : "Drakonas", glyph : 'D', levels : [ 2 ],
+            hp : Some(15),
+            fov: Some(7),
+            base_damage: Some(4),
+            frequency: 1
         ),
     ],
 )
