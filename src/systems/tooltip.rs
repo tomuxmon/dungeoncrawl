@@ -6,7 +6,15 @@ use crate::prelude::*;
 #[read_component(Health)]
 #[read_component(FieldOfView)]
 #[read_component(Player)]
-pub fn tooltip(ecs: &SubWorld, #[resource] mouse_pos: &Point, #[resource] camera: &Camera) {
+pub fn tooltip(
+    ecs: &SubWorld,
+    #[resource] mouse_pos: &Point,
+    #[resource] camera: &Camera,
+    #[resource] turn_state: &TurnState,
+) {
+    if *turn_state != TurnState::AwaitingInput {
+        return;
+    }
     let mut positions = <(Entity, &Point, &Name)>::query();
     let mut fov = <&FieldOfView>::query().filter(component::<Player>());
     let player_fov = fov.iter(ecs).nth(0).unwrap();

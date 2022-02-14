@@ -6,7 +6,15 @@ use crate::prelude::*;
 #[read_component(FieldOfView)]
 #[read_component(Health)]
 #[read_component(Player)]
-pub fn chasing(#[resource] map: &Map, ecs: &SubWorld, commands: &mut CommandBuffer) {
+pub fn chasing(
+    ecs: &SubWorld,
+    commands: &mut CommandBuffer,
+    #[resource] map: &Map,
+    #[resource] turn_state: &TurnState,
+) {
+    if *turn_state != TurnState::MonsterTurn {
+        return;
+    }
     let mut movers = <(Entity, &Point, &ChasingPlayer, &FieldOfView)>::query();
     let mut positions = <(Entity, &Point, &Health)>::query();
     let mut player = <(&Point, &Player)>::query();

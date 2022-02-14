@@ -28,8 +28,7 @@ struct State {
     ecs: World,
     resources: Resources,
     input_systems: Schedule,
-    player_systems: Schedule,
-    monster_systems: Schedule,
+    turn_systems: Schedule,
 }
 
 impl State {
@@ -59,8 +58,7 @@ impl State {
             ecs,
             resources,
             input_systems: build_input_scheduler(),
-            player_systems: build_player_scheduler(),
-            monster_systems: build_monster_scheduler(),
+            turn_systems: build_turn_scheduler(),
         }
     }
 
@@ -119,7 +117,6 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let mut map_builder = MapBuilder::new(&mut rng);
         spawn_player(&mut self.ecs, map_builder.player_start);
-        // spawn_amulet_of_yala(&mut self.ecs, map_builder.amulet_start);
         let exit_idx = map_builder.map.point2d_to_index(map_builder.amulet_start);
         map_builder.map.tiles[exit_idx] = TileType::Exit;
         spawn_level(
@@ -135,7 +132,7 @@ impl State {
         self.resources.insert(map_builder.theme);
     }
 
-    fn advance_level(&mut self) {
+    fn next_level(&mut self) {
         use std::collections::HashSet;
         let player_entity = *<Entity>::query()
             .filter(component::<Player>())
@@ -215,15 +212,12 @@ impl GameState for State {
             TurnState::AwaitingInput => self
                 .input_systems
                 .execute(&mut self.ecs, &mut self.resources),
-            TurnState::PlayerTurn => self
-                .player_systems
-                .execute(&mut self.ecs, &mut self.resources),
-            TurnState::MonsterTurn => self
-                .monster_systems
-                .execute(&mut self.ecs, &mut self.resources),
             TurnState::GameOver => self.game_over(ctx),
             TurnState::Victory => self.victory(ctx),
-            TurnState::NextLevel => self.advance_level(),
+            TurnState::NextLevel => self.next_level(),
+            _ => self // TurnState::PlayerTurn || TurnState::MonsterTurn
+                .turn_systems
+                .execute(&mut self.ecs, &mut self.resources),
         }
         render_draw_buffer(ctx).expect("Render Error");
     }

@@ -5,7 +5,14 @@ use crate::prelude::*;
 #[read_component(MovingRandomly)]
 #[read_component(Health)]
 #[read_component(Player)]
-pub fn random_move(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
+pub fn random_move(
+    ecs: &mut SubWorld,
+    commands: &mut CommandBuffer,
+    #[resource] turn_state: &TurnState,
+) {
+    if *turn_state != TurnState::MonsterTurn {
+        return;
+    }
     let mut movers = <(Entity, &Point, &MovingRandomly)>::query();
     let mut positions = <(Entity, &Point, &Health)>::query();
 
